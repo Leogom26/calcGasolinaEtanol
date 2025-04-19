@@ -13,12 +13,14 @@ interface InfoProps{
 }
 
 function App() {
-  const [gasolinaInput, setGasolinaInput] = useState(0);
-  const [alcoolInput, setAlcoolInput] = useState(0);
+  const [gasolinaInput, setGasolinaInput] = useState<number>();
+  const [alcoolInput, setAlcoolInput] = useState<number>();
   const [info, setInfo] = useState<InfoProps>()
 
   function calcular(event: FormEvent){
     event.preventDefault();
+    setGasolinaInput(0);
+    setAlcoolInput(0);
 
     const calculo = (alcoolInput / gasolinaInput);
 
@@ -61,7 +63,7 @@ function App() {
           <input
             className="input"
             type="number"
-            placeholder="4,90"
+            placeholder="Digite um valor"
             min="1"
             step="0.01"
             required
@@ -73,7 +75,7 @@ function App() {
           <input
             className="input"
             type="number"
-            placeholder="4,90"
+            placeholder="Digite um valor"
             min="1"
             step="0.01"
             required
