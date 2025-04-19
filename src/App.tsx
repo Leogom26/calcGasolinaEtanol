@@ -13,29 +13,35 @@ interface InfoProps{
 }
 
 function App() {
-  const [gasolinaInput, setGasolinaInput] = useState<number>();
-  const [alcoolInput, setAlcoolInput] = useState<number>();
+  const [gasolinaInput, setGasolinaInput] = useState<string>('');
+  const [alcoolInput, setAlcoolInput] = useState<string>('');
   const [info, setInfo] = useState<InfoProps>()
 
   function calcular(event: FormEvent){
     event.preventDefault();
-    setGasolinaInput(0);
-    setAlcoolInput(0);
 
-    const calculo = (alcoolInput / gasolinaInput);
+    const gasolina = Number(gasolinaInput);
+    const alcool = Number(alcoolInput);
 
-    if(calculo <= 0.7){
+    if (gasolina === 0 || alcool === 0 || isNaN(gasolina) || isNaN(alcool)) {
+      alert("Preencha os campos com valores válidos.");
+      return;
+    }
+    
+    const calculo = alcool + 0 / gasolina + 0;
+
+    if (calculo <= 0.7) {
       setInfo({
-        title:"Compensa usar álcool",
-        gasolina: formatarMoeda(gasolinaInput),
-        alcool: formatarMoeda(alcoolInput)
-      })
-    }else {
+        title: "Compensa usar álcool",
+        gasolina: formatarMoeda(gasolina),
+        alcool: formatarMoeda(alcool),
+      });
+    } else {
       setInfo({
-        title:"Compensa usar gasolina",
-        gasolina: formatarMoeda(gasolinaInput),
-        alcool: formatarMoeda(alcoolInput)
-      })
+        title: "Compensa usar gasolina",
+        gasolina: formatarMoeda(gasolina),
+        alcool: formatarMoeda(alcool),
+      });
     }
   }
 
@@ -68,7 +74,7 @@ function App() {
             step="0.01"
             required
             value={alcoolInput}
-            onChange={(e) => setAlcoolInput(Number(e.target.value))}
+            onChange={(e) => setAlcoolInput(e.target.value)}
           />
 
           <label>Gasolina (preço por litro):</label>
@@ -80,7 +86,7 @@ function App() {
             step="0.01"
             required
             value={gasolinaInput}
-            onChange={(e) => setGasolinaInput(Number(e.target.value))}
+            onChange={(e) => setGasolinaInput(e.target.value)}
           />
 
           <input className="button"  type="submit" value="Calcular"/>
