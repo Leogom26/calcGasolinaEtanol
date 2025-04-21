@@ -28,7 +28,7 @@ function App() {
       return;
     }
     
-    const calculo = alcool + 0 / gasolina + 0;
+    const calculo = alcool / gasolina;
 
     if (calculo <= 0.7) {
       setInfo({
